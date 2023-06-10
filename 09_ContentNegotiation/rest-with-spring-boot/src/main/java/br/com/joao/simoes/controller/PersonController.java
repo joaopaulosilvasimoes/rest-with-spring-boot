@@ -24,7 +24,8 @@ public class PersonController {
 	@Autowired
 	private PersonServices personServices;
 
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(
+				produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
 	public List<PersonVO> findAll() {
 		
 		System.out.println("findAll");
@@ -33,7 +34,8 @@ public class PersonController {
 		
 	}
 	
-	@GetMapping(path="/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path="/{id}", 
+				produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
 	public PersonVO findById(@PathVariable(value = "id") Long id) {
 		
 		System.out.println("findById");
@@ -42,14 +44,18 @@ public class PersonController {
 		
 	}
 	
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(
+				 consumes = MediaType.APPLICATION_JSON_VALUE, 
+				 produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
 	public PersonVO create(@RequestBody PersonVO person) {
 		
 		return personServices.createPerson(person);
 		
 	}
 	
-	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(
+				consumes = MediaType.APPLICATION_JSON_VALUE, 
+				produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE, "application/x-yaml"})
 	public PersonVO update(@RequestBody PersonVO person) {
 		
 		return personServices.updatePerson(person);
